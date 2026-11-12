@@ -158,7 +158,7 @@ struct nvram_pair router_defaults[] = {
 	{ "wl_country_code", DEF_WLAN_5G_CC },		/* Country Code (default obtained from driver) */
 	{ "wl_ssid", DEF_WLAN_5G_SSID },		/* Service set ID (network name) */
 #if defined(BOARD_HAS_5G_11AX) && BOARD_HAS_5G_11AX
-	{ "wl_gmode", "5" },			/* A/N/AC/AX Mixed */
+	{ "wl_gmode", "4" },			/* A/N/AC/AX Mixed */
 #elif BOARD_HAS_5G_11AC
 	{ "wl_gmode", "4" },			/* A/N/AC Mixed */
 #else
@@ -267,7 +267,7 @@ struct nvram_pair router_defaults[] = {
 	{ "rt_country_code", DEF_WLAN_2G_CC },
 	{ "rt_ssid", DEF_WLAN_2G_SSID },
 #if defined(BOARD_HAS_2G_11AX) && BOARD_HAS_2G_11AX
-	{ "rt_gmode", "6" },			/* b/g/n/ax mixed */
+	{ "rt_gmode", "5" },			/* b/g/n/ax mixed */
 #else
 	{ "rt_gmode", "5" },			/* g/n mixed */
 #endif
@@ -703,21 +703,21 @@ struct nvram_pair router_defaults[] = {
 	{ "controlrate_broadcast", "10" },
 
 	{ "di_poll_mode", "0" },
-	{ "di_timeout", "2" },
-	{ "di_time_done", "30" },
+	{ "di_timeout", "3" },
+	{ "di_time_done", "55" },
 	{ "di_time_fail", "5" },
-	{ "di_lost_delay", "1" },
+	{ "di_lost_delay", "10" },
 	{ "di_lost_action", "0" },
 	{ "di_recon_pause", "0" },
-	{ "di_addr0", "114.114.114.114" },
-	{ "di_addr1", "208.67.222.222" },
-	{ "di_addr2", "14.17.42.40" },
-	{ "di_addr3", "8.8.8.8" },
+	{ "di_addr0", "77.88.8.8" },
+	{ "di_addr1", "8.8.8.8" },
+	{ "di_addr2", "208.67.222.222" },
+	{ "di_addr3", "77.88.8.1" },
 	{ "di_addr4", "8.8.4.4" },
 	{ "di_addr5", "208.67.220.220" },
 	{ "di_port0", "53" },
 	{ "di_port1", "53" },
-	{ "di_port2", "80" },
+	{ "di_port2", "53" },
 	{ "di_port3", "53" },
 	{ "di_port4", "53" },
 	{ "di_port5", "53" },
@@ -725,7 +725,7 @@ struct nvram_pair router_defaults[] = {
 	{ "fw_pt_pppoe", "0" },
 
 #if defined(BOARD_ROLE_REPEATER)
-	{ "sw_mode", "3" },
+	{ "sw_mode", "1" },
 #else
 	{ "sw_mode", "1" },
 #endif
@@ -761,7 +761,7 @@ struct nvram_pair router_defaults[] = {
 	{ "watchdog_cpu", "1" },
 	{ "front_led_all", "1" },
 	{ "front_led_wan", "2" },
-	{ "front_led_lan", "2" },
+	{ "front_led_lan", "1" },
 	{ "front_led_wif", "1" },
 	{ "front_led_usb", "1" },
 	{ "front_led_pwr", "1" },
@@ -772,12 +772,12 @@ struct nvram_pair router_defaults[] = {
 	{ "ether_green", "1" },
 	{ "ether_eee", "0" },
 #if defined(USE_RTL8367)
-	{ "ether_jumbo", "1" },
+	{ "ether_jumbo", "0" },
 #else
 	{ "ether_jumbo", "0" },
 #endif
 #if (BOARD_NUM_ETH_LEDS > 1)
-	{ "ether_led0", "3" },
+	{ "ether_led0", "7" },
 #else
 	{ "ether_led0", "7" },
 #endif
@@ -822,7 +822,7 @@ struct nvram_pair router_defaults[] = {
 	{ "nf_nat_type", "2" },
 	{ "nf_nat_loop", "1" },
 #if (BOARD_RAM_SIZE > 128)
-	{ "nf_max_conn", "32768" },
+	{ "nf_max_conn", "16384" },
 #elif (BOARD_RAM_SIZE > 32)
 	{ "nf_max_conn", "16384" },
 #else
@@ -981,4 +981,7 @@ struct nvram_pair tables_defaults[] = {
 	{ "rt_wdslist_x", "" },
 
 	{ 0, 0 }
+
+	/* ==== aligned from H大 firmware ==== */
+	{ "dnsmasq_cache_size", "1024" },
 };
