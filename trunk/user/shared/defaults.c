@@ -429,8 +429,8 @@ struct nvram_pair router_defaults[] = {
 	{ "ip6_wan_gate", "" },
 
 	{ "ip6_dns_auto", "0" },
-	{ "ip6_dns1", "223.5.5.5" },
-	{ "ip6_dns2", "119.29.29.29" },
+	{ "ip6_dns1", "2400:3200::1" },
+	{ "ip6_dns2", "2402:4e00::" },
 	{ "ip6_dns3", "" },
 
 	{ "ip6_lan_auto", "1" },
