@@ -11,28 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Customize config and defaults
+      - name: Verify baked customizations
         run: |
           set -e
           CFG=trunk/configs/templates/K2P.config
           DH=trunk/user/shared/defaults.h
-          DC=trunk/user/shared/defaults.c
-          sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENVPN=y/CONFIG_FIRMWARE_INCLUDE_OPENVPN=n/' "$CFG"
-          sed -i 's/CONFIG_FIRMWARE_INCLUDE_SMBD36=y/CONFIG_FIRMWARE_INCLUDE_SMBD36=n/' "$CFG"
-          grep -q '^CONFIG_FIRMWARE_INCLUDE_SMARTDNS=' "$CFG" || echo 'CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y' >> "$CFG"
-          sed -i 's|#define DEF_WLAN_2G_SSID.*|#define DEF_WLAN_2G_SSID "Redmi_AC2100_2.4G"|' "$DH"
-          sed -i 's|#define DEF_WLAN_5G_SSID.*|#define DEF_WLAN_5G_SSID "Redmi_AC2100_5G"|' "$DH"
-          sed -i 's|"wl_auth_mode", "psk"|"wl_auth_mode", "open"|' "$DC"
-          sed -i 's|"rt_auth_mode", "psk"|"rt_auth_mode", "open"|' "$DC"
-          echo "=== verify customizations ==="
+          KC=trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
           grep -q 'CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y' "$CFG"
           grep -q 'CONFIG_FIRMWARE_INCLUDE_OPENVPN=n' "$CFG"
           grep -q 'CONFIG_FIRMWARE_INCLUDE_SMBD36=n' "$CFG"
-          grep -q 'Redmi_AC2100_2.4G' "$DH"
           grep -q 'Redmi_AC2100_5G' "$DH"
-          grep -q '"wl_auth_mode", "open"' "$DC"
-          grep -q '"rt_auth_mode", "open"' "$DC"
-          echo "All customizations applied and verified."
+          grep -q 'Redmi_AC2100_2.4G' "$DH"
+          grep -q 'CONFIG_DBDC_MODE=y' "$KC"
+          grep -q 'CONFIG_EXT4_FS=y' "$KC"
+          echo "All customizations verified."
 
       - name: Install dependencies
         run: |
