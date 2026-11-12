@@ -381,6 +381,23 @@ void restart_dnsforwarder(void){
 }
 #endif
 
+#if defined(APP_SMARTDNS)
+void stop_smartdns(void){
+	eval("/usr/bin/smartdns.sh","stop");
+}
+
+void start_smartdns(void){
+	int smartdns_mode = nvram_get_int("sdns_enable");
+	if ( smartdns_mode == 1)
+		eval("/usr/bin/smartdns.sh","start");
+}
+
+void restart_smartdns(void){
+	stop_smartdns();
+	start_smartdns();
+}
+#endif
+
 #if defined(APP_NAPT66)
 void start_napt66(void){
 	int napt66_mode = nvram_get_int("napt66_enable");
@@ -615,6 +632,9 @@ start_services_once(int is_ap_mode)
 #if defined(APP_VLMCSD)
 	start_vlmcsd();
 #endif
+#if defined(APP_SMARTDNS)
+	start_smartdns();
+#endif
 	start_lltd();
 	start_watchdog_cpu();
 	start_crond();
@@ -654,6 +674,9 @@ stop_services(int stopall)
 #endif
 #if defined(APP_TTYD)
 	stop_ttyd();
+#endif
+#if defined(APP_SMARTDNS)
+	stop_smartdns();
 #endif
 	stop_networkmap();
 	stop_lltd();
