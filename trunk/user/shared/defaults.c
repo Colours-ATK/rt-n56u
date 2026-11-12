@@ -901,6 +901,7 @@ struct nvram_pair router_defaults[] = {
 	{ "xTun_black_list", "/etc/storage/xTun_black_list" },
 #endif
 
+	{ "dnsmasq_cache_size", "1024" },
 	{ 0, 0 }
 };
 
@@ -982,6 +983,4 @@ struct nvram_pair tables_defaults[] = {
 
 	{ 0, 0 }
 
-	/* ==== aligned from H大 firmware ==== */
-	{ "dnsmasq_cache_size", "1024" },
 };
